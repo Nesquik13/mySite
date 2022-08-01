@@ -18,4 +18,10 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+
+    public function actionUser()
+    {
+        $dataProvider = new User();
+        return $this->render('user' , ['dataProvider' => $dataProvider]);
+    }
 }

@@ -3,6 +3,8 @@
 use app\assets\AppAsset;
 use app\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 
 AppAsset::register($this);
@@ -19,7 +21,7 @@ AppAsset::register($this);
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <?php $this->registerCsrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?>></title>
+        <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
     <body>
@@ -43,19 +45,21 @@ AppAsset::register($this);
         </div>
         <div>
             <ul class="navbar-nav">
+                <?php if (Yii::$app->user->isGuest) { ?>
                 <li class="nav-item" style="margin-right: 15px">
-                    <form class="form-inline">
-                        <a href="/user/create" style="text-decoration:none">
-                            <button type="button" class="btn btn-light"> Регистрация</button>
-                        </a>
-                    </form>
-                <li class="nav-item">
-                    <form class="form-inline">
-                        <a href="/user/entrance" style="text-decoration:none">
-                            <button type="button" class="btn btn-info"> Вход</button>
-                        </a>
-                    </form>
+                    <a href="/user/create" class="btn btn-light">Регистрация</a>
                 </li>
+                <li class="nav-item">
+                    <a href="/auth/entrance" class="btn btn-success">Вход</a>
+                </li>
+                <?php } else { ?>
+                    <li class="nav-item" style="margin-right: 20px">
+                        <h6 class="m-2" style="color: white " >Приветствую, <?= Yii::$app->user->identity->name ?></h6>
+                    </li>
+                    <li class="nav-item" >
+                        <a href="/auth/logout" class="btn btn-info">Выйти</a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
     </nav>

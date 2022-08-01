@@ -8,6 +8,7 @@ use yii\web\Controller;
 
 class UserController extends Controller
 {
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -15,9 +16,9 @@ class UserController extends Controller
 
     public function actionCreate()
     {
+        $this->view->title = 'Создать';
         $model = new User();
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect('index');
         }
         return $this->render('create', ['model' => $model]);
@@ -25,9 +26,9 @@ class UserController extends Controller
 
     public function actionUpdate()
     {
+        $this->view->title = 'Редактировать';
         $model = new User();
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect('index');
         }
         return $this->render('update', ['model' => $model]);
@@ -39,4 +40,5 @@ class UserController extends Controller
         $user->delete();
         return $this->redirect('index');
     }
+
 }
